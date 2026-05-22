@@ -128,9 +128,10 @@ export function activate(context: vscode.ExtensionContext) {
   context.subscriptions.push(
     vscode.commands.registerCommand(
       "hamlHero.refreshDiagnostics",
-      (document: vscode.TextDocument) => {
-        if (document && document.languageId === "haml") {
-          updateDiagnostics(document);
+      (document?: vscode.TextDocument) => {
+        const doc = document ?? vscode.window.activeTextEditor?.document;
+        if (doc && doc.languageId === "haml") {
+          updateDiagnostics(doc);
         }
       }
     )
